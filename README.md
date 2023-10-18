@@ -390,3 +390,62 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
 ```
 
 </details>
+
+<details>
+  <summary>
+    <h2>Loops</h2><br>
+    <i>todo.</i>
+  </summary>
+
+## Loops
+
+### foreach using an array
+
+```bicep
+param parStorageAccountNames array = [
+  'storageaccount1'
+  'storageaccount2'
+  'storageaccount3'
+]
+
+resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for name in parStorageAccountNames: {
+  name: name
+  location: 'westeurope'
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+}]
+```
+
+### foreach using an array of objects
+
+``` bicep
+param parStorageAccountNames array = [
+  {
+      name: 'storageaccount1'
+      kind: 'StorageV2'
+      sku: {
+          name: 'Standard_LRS'
+      }
+  }
+  {
+      name: 'storageaccount2'
+      kind: 'StorageV2'
+      sku: {
+          name: 'Standard_LRS'
+      }
+  }
+]
+
+resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for storageAccount in parStorageAccountNames: {
+  name: storageAccount.name
+  location: 'westeurope'
+  kind: storageAccount.kind
+  sku: {
+      name: storageAccount.sku
+  }
+}]
+```
+
+</details>
