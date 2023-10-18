@@ -1,6 +1,6 @@
 # Azure Bicep Cheat sheet
 
-This Azure Bicep Cheatsheet repository contain a set of quick references for Azure Bicep!
+This Azure Bicep Cheatsheet repository contain a set of quick code references for Azure Bicep!
 
 ### What is a cheat sheet?
 
