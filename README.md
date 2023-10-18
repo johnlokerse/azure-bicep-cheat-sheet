@@ -366,8 +366,6 @@ returns
 
 </details>
 
-</details>
-
 <details>
   <summary>
     <h2>Bicepconfig</h2><br>
