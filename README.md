@@ -2,6 +2,10 @@
 
 Azure Bicep has become my preferred tool for crafting infrastructure-as-code for Azure, thanks to its modularity and effortless adaptability. This repository serves as a handy cheat sheet, offering rapid code snippets and references for Azure Bicep.
 
+> Community contributions are appreciated :-)! If you have content to add, please add it to the sheet! Make sure to check the [contribution guidelines](CONTRIBUTING.md) before contributing.
+
+// TODO: Image of Azure Bicep logo
+
 ## What is a cheat sheet?
 
 A cheat sheet is a concise set of notes or a reference guide used for quick retrieval of essential information. It's often a single page that contains summaries, commands, formulas, or procedures that someone might need to reference frequently, especially when learning a new topic or skill.
