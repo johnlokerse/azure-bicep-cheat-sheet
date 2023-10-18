@@ -1,6 +1,6 @@
 # Azure Bicep Cheat sheet
 
-This Azure Bicep Cheatsheet repository contain a set of quick code references for Azure Bicep!
+Azure Bicep has become my preferred tool for crafting infrastructure-as-code for Azure, thanks to its modularity and effortless adaptability. This repository serves as a handy cheat sheet, offering rapid code snippets and references for Azure Bicep.
 
 ## What is a cheat sheet?
 
@@ -17,9 +17,12 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 - [MacOS] Via Homebrew: `brew install bicep`
 
 <details>
-  <summary><h2>Basics</h2></summary>
+  <summary>
+    <h2>Basics</h2> <br>
+    <i>Declarations of new and existing resources, variables, parameters and outputs.</i>
+  </summary>
 
-  ### Create a resource 
+  ### Create a resource
   ```bicep
   resource resourceName 'ResourceType@version' = {
     name: 'exampleResourceName'
@@ -30,9 +33,7 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
   ```
 
   ### Create a child resource
-  
   **Via name**
-  
   ```bicep
   resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'my-vnet'
@@ -44,7 +45,6 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
   ```
   
   **Via parent property**
-  
   ```bicep
   resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'my-vnet'
@@ -57,7 +57,6 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
   ```
   
   **Via parent resource**
-  
   ```bicep
   resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'my-vnet'
@@ -68,16 +67,14 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
   }
   ```
 
-### Reference to an existing resource
-
+  ### Reference to an existing resource
   ```bicep
   resource resKeyVaultRef 'Microsoft.KeyVault/vaults@2019-09-01' = existing {
     name: 'myExistingKeyVaultName'
   }
   ```
 
-### Access a nested resource (::)
-
+  ### Access a nested resource (::)
   ```bicep
   resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
     name: 'my-vnet'
@@ -89,5 +86,108 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
   
   // query child resource
   output outChildSubnetId string = resVnet::resChildSubnet.id
+  ```
+
+  ### Declare a variable
+  ```bicep
+    var varEnvironment = 'dev'
+  ```
+  There is no need to declare a datatype for a variable, because the type is inferred from the value.
+
+  ### Declare a parameter
+  ```bicep
+    param parStorageAccountName string
+    param parLocation string = resourceGroup().location
+  ```
+  Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom (user defined type)`.
+
+  ### Declare a secure parameter
+  ```bicep
+    @secure()
+    param parSecureParameter string
+  ```
+
+  ### Declare an output
+  ```bicep
+    resource resPublicIp 'Microsoft.Network/publicIPAddresses@2023-02-01' ={
+      name: parPublicIpName
+      tags: parTags
+      location: parLocation
+      zones: parAvailabilityZones
+      sku: parPublicIpSku
+      properties: parPublicIpProperties
+    }
+    
+    output outPublicIpId string = resPublicIp.id
+    output outMyString string = 'Hello!'
+  ```
+  Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom (user defined type)`.
+
+</details>
+
+<details>
+  <summary>
+    <h2>Modules</h2><br>
+    <i>Split your deployment into smaller, reusable components.</i>
+  </summary>
+
+  ### Create a module
+  ```bicep
+    module modVirtualNetwork './network.bicep' = {
+      name: 'networkModule'
+      params: {
+        parLocation: 'westeurope'
+        parVnetName: 'my-vnet-name'
+      }
+    }
+  ```
+  
+  ### Reference to a module using a bicep registry
+  ```bicep
+    module modBicepRegistryReference 'br/<bicep registry name>:<file path>:<tag>' = {
+        name: 'deployment-name'
+        params: {}
+    }
+  ```
+</details>
+
+<details>
+  <summary>
+    <h2>Dependencies</h2><br>
+    <i>Implicit and explicit dependencies.</i>
+  </summary>
+
+  ### Implicit dependency using symbolic name
+  ```bicep
+    resource resNetworkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+      name: 'my-networkSecurityGroup'
+      location: resourceGroup().location
+    }
+    
+    resource nsgRule 'Microsoft.Network/networkSecurityGroups/securityRules@2019-11-01' = {
+      name: '${resNetworkSecurityGroup}/AllowAllRule'
+      properties: {
+        // resource properties here
+      }
+    }
+  ```
+  
+  ### Explicit dependency using dependsOn
+  ```bicep
+    resource resDnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
+      name: 'contoso.com'
+      location: 'global'
+    }
+    
+    module modVirtualNetwork './network.bicep' = {
+      name: 'networkModule'
+      params: {
+        parLocation: 'westeurope'
+        parVnetName: 'my-vnet-name'
+      }
+      dependsOn: [
+        resDnsZone
+      ]
+    }
   ```
 </details>
