@@ -280,10 +280,10 @@ returns
 ```json
 [
   {
-    productName: 'Banana'
-    productPrice: 4
-    productCharacteristics: [
-      'Bio'
+    "productName": "Banana",
+    "productPrice": 4,
+    "productCharacteristics": [
+      "Bio"
     ]
   }
 ]
@@ -304,14 +304,14 @@ returns
 ```json
 [
   {
-    productNumber: 0
-    productName: 'Icecream'
-    discountedPrice: 'The item Icecream is on sale. Sale price: 1'
-  }
+    "productNumber": 0,
+    "productName": "Icecream",
+    "discountedPrice": "The item Icecream is on sale. Sale price: 1"
+  },
   {
-    productNumber: 1
-    productName: 'Banana'
-    discountedPrice: 'The item Banana is on sale. Sale price: 2'
+    "productNumber": 1,
+    "productName": "Banana",
+    "discountedPrice": "The item Banana is on sale. Sale price: 2"
   }
 ]
 ```
@@ -325,21 +325,20 @@ returns
 returns
 
 ```json
-
 [
   {
-    productName: 'Icecream'
-    productPrice: 2
-    productCharacteristics: [
-      'Vegan'
-      'Seasonal'
+    "productName": "Icecream",
+    "productPrice": 2,
+    "productCharacteristics": [
+      "Vegan"
+      "Seasonal"
     ]
-  }
+  },
   {
-    productName: 'Banana'
-    productPrice: 4
-    productCharacteristics: [
-      'Bio'
+    "productName": "Banana",
+    "productPrice": 4,
+    "productCharacteristics": [
+      "Bio"
     ]
   }
 ]
