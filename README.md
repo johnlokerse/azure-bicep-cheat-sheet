@@ -239,9 +239,21 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 <details>
   <summary>
     <h2>Target Scopes</h2><br>
-    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+    <i>Deployment levels.</i>
   </summary>
 
+### Target scopes
+
+The `targetScope` directive in Azure Bicep determines the level at which the Bicep template will be deployed within Azure. The default is `targetScope = 'resourceGroup'`.
+
+Azure Bicep supports multiple levels of `targetScope`:
+
+| Scope           | Description     |
+| --------------- | --------------- |
+| resourceGroup   | The Bicep file is intended to be deployed at the Resource Group level. |
+| subscription    | The Bicep file targets a Subscription, allowing you to manage resources or configurations across an entire subscription. |
+| managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group. |
+| tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
 
 </details>
 
