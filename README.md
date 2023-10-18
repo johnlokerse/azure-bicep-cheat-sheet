@@ -261,7 +261,7 @@ Azure Bicep supports multiple levels of `targetScope`:
 
 <details>
   <summary>
-    <h2>Data manipulation functions</h2><br>
+    <h2>Data manipulation</h2><br>
     <i>Functions used to manipulate data.</i>
   </summary>
 
@@ -396,8 +396,6 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
     <h2>Loops</h2><br>
     <i>todo.</i>
   </summary>
-
-## Loops
 
 ### foreach using an array
 
