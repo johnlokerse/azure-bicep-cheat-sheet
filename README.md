@@ -243,9 +243,106 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 
 <details>
   <summary>
-    <h2>Target Scopes</h2><br>
-    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+    <h2>Data manipulation functions</h2><br>
+    <i>Functions used to manipulate data.</i>
   </summary>
 
+### Example data
+
+```bicep
+var varGroceryStore = [
+  {
+    productName: 'Icecream'
+    productPrice: 2
+    productCharacteristics: [
+      'Vegan'
+      'Seasonal'
+    ]
+  }
+  {
+    productName: 'Banana'
+    productPrice: 4
+    productCharacteristics: [
+      'Bio'
+    ]
+  }
+]
+```
+
+### filter() function
+
+```bicep
+  output outProducts array = filter(varGroceryStore, item => item.productPrice >= 4)
+```
+
+returns
+
+```json
+[
+  {
+    productName: 'Banana'
+    productPrice: 4
+    productCharacteristics: [
+      'Bio'
+    ]
+  }
+]
+```
+
+### map() function
+
+```bicep
+  output outDiscount array = map(range(0, length(varGroceryStore)), item => {
+    productNumber: item
+    productName: varGroceryStore[item].productName
+    discountedPrice: 'The item ${varGroceryStore[item].productName} is on sale. Sale price: ${(varGroceryStore[item].productPrice / 2)}'
+  })
+```
+
+returns
+
+```json
+[
+  {
+    productNumber: 0
+    productName: 'Icecream'
+    discountedPrice: 'The item Icecream is on sale. Sale price: 1'
+  }
+  {
+    productNumber: 1
+    productName: 'Banana'
+    discountedPrice: 'The item Banana is on sale. Sale price: 2'
+  }
+]
+```
+
+### sort() function
+
+```bicep
+  output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.productPrice)
+```
+
+returns
+
+```json
+
+[
+  {
+    productName: 'Icecream'
+    productPrice: 2
+    productCharacteristics: [
+      'Vegan'
+      'Seasonal'
+    ]
+  }
+  {
+    productName: 'Banana'
+    productPrice: 4
+    productCharacteristics: [
+      'Bio'
+    ]
+  }
+]
+```
 
 </details>
