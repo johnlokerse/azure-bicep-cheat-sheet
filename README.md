@@ -454,3 +454,26 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
 ```
 
 </details>
+
+<details>
+  <summary>
+    <h2>Bicepconfig</h2><br>
+    <i>Functions used to manipulate data.</i>
+  </summary>
+
+### Azure Container Registry configuration
+
+```json
+{
+  "moduleAliases": {
+    "br": {
+      "<bicep registry name>": {
+        "registry": "<url to registry>",
+        "modulePath": "<module path of the alias>"
+      }
+    }
+  }
+}
+```
+
+</details>
