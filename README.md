@@ -209,3 +209,43 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 ```
 
 </details>
+
+<details>
+  <summary>
+    <h2>Deployment</h2><br>
+    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+  </summary>
+
+### Azure CLI
+
+| Scope            | Command       |
+| ---------------- | ------------- |
+| resourceGroup    | `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`  |
+| subscription     | `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
+| managementGroup  | `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`  |
+| tenant           | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
+
+- resource group scope: `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`
+- subscription scope: `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`
+- management group scope: `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`
+- tenant scope: `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`
+
+### Azure PowerShell
+
+| Scope            | Command       |
+| ---------------- | ------------- |
+| resourceGroup    | `New-AzResourceGroupDeployment -ResourceGroupName "YourResourceGroupName" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam`  |
+| subscription     | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+| managementGroup  | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+| tenant           | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+
+</details>
+
+<details>
+  <summary>
+    <h2>Target Scopes</h2><br>
+    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+  </summary>
+
+
+</details>
