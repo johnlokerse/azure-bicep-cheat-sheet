@@ -10,11 +10,7 @@ A cheat sheet is a concise set of notes or a reference guide used for quick retr
 
 Azure Bicep is a domain-specific language (also known as DSL) designed by Microsoft for defining and deploying Azure resources in a declarative manner. It's the next generation of Azure Resource Manager (ARM) templates, offering a cleaner syntax, improved type safety, and better support for modularization. While ARM templates use JSON syntax, Bicep uses a more concise syntax that aims to make it easier for developers to author and maintain Azure deployments
 
-### **Installation**
-
-- [Agnostic] Via Azure CLI: `az bicep install`
-- [Windows] Via Chocolatey: `choco install bicep`
-- [MacOS] Via Homebrew: `brew install bicep`
+## Reference Guides
 
 <details>
   <summary>
@@ -233,6 +229,15 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 | subscription     | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
 | managementGroup  | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
 | tenant           | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+
+</details>
+
+<details>
+  <summary>
+    <h2>Target Scopes</h2><br>
+    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+  </summary>
+
 
 </details>
 
