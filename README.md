@@ -259,47 +259,7 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
 }]
 ```
 
-
-
-<details>
-  <summary>
-    <h2>Dependencies</h2><br>
-    <i>Implicit and explicit dependencies.</i>
-  </summary>
-
-### Implicit dependency using symbolic name
-
-```bicep
-  resource resNetworkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
-    name: 'my-networkSecurityGroup'
-    location: resourceGroup().location
-  }
-  resource nsgRule 'Microsoft.Network/networkSecurityGroups/securityRules@2019-11-01' = {
-    name: '${resNetworkSecurityGroup}/AllowAllRule'
-    properties: {
-      // resource properties here
-    }
-  }
-```
-
-### Explicit dependency using dependsOn
-
-```bicep
-  resource resDnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
-    name: 'contoso.com'
-    location: 'global'
-  }
-  module modVirtualNetwork './network.bicep' = {
-    name: 'networkModule'
-    params: {
-      parLocation: 'westeurope'
-      parVnetName: 'my-vnet-name'
-    }
-    dependsOn: [
-      resDnsZone
-    ]
-  }
-```
+</details>
 
 <details>
   <summary>
@@ -411,7 +371,7 @@ returns
 <details>
   <summary>
     <h2>Bicepconfig</h2><br>
-    <i>Functions used to manipulate data.</i>
+    <i>Configuration of Azure Bicep.</i>
   </summary>
 
 ### Azure Container Registry configuration
@@ -430,6 +390,46 @@ returns
 ```
 
 </details>
+
+<details>
+  <summary>
+    <h2>Dependencies</h2><br>
+    <i>Implicit and explicit dependencies.</i>
+  </summary>
+
+### Implicit dependency using symbolic name
+
+```bicep
+  resource resNetworkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+    name: 'my-networkSecurityGroup'
+    location: resourceGroup().location
+  }
+  resource nsgRule 'Microsoft.Network/networkSecurityGroups/securityRules@2019-11-01' = {
+    name: '${resNetworkSecurityGroup}/AllowAllRule'
+    properties: {
+      // resource properties here
+    }
+  }
+```
+
+### Explicit dependency using dependsOn
+
+```bicep
+  resource resDnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
+    name: 'contoso.com'
+    location: 'global'
+  }
+  module modVirtualNetwork './network.bicep' = {
+    name: 'networkModule'
+    params: {
+      parLocation: 'westeurope'
+      parVnetName: 'my-vnet-name'
+    }
+    dependsOn: [
+      resDnsZone
+    ]
+  }
+```
 
 </details>
 
@@ -479,3 +479,5 @@ Azure Bicep supports multiple levels of `targetScope`:
 | tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
 
 </details>
+
+
