@@ -368,6 +368,14 @@ var varGroceryStore = [
 
 <details>
   <summary>
+    <h2>User Defined Types</h2><br>
+    <i>TODO.</i>
+  </summary>
+  TODO
+</details
+
+<details>
+  <summary>
     <h2>Bicepconfig</h2><br>
     <i>Configuration of Azure Bicep.</i>
   </summary>
