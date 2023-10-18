@@ -4,7 +4,9 @@ Azure Bicep has become my preferred tool for crafting infrastructure-as-code for
 
 > Community contributions are appreciated :-)! If you have content to add, please add it to the sheet! Make sure to check the [contribution guidelines](CONTRIBUTING.md) before contributing.
 
-// TODO: Image of Azure Bicep logo
+<p align="center">
+  <img src="images/AzureBicepCheatSheetHeader.png">
+</p>
 
 ## What is a cheat sheet?
 
