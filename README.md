@@ -295,7 +295,7 @@ var varGroceryStore = [
   output outProducts array = filter(varGroceryStore, item => item.productPrice >= 4)
 ```
 
-returns
+#### returns
 
 ```json
 [
@@ -319,7 +319,7 @@ returns
   })
 ```
 
-returns
+#### returns
 
 ```json
 [
@@ -342,7 +342,7 @@ returns
   output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.productPrice)
 ```
 
-returns
+#### returns
 
 ```json
 [
@@ -477,5 +477,3 @@ Azure Bicep supports multiple levels of `targetScope`:
 | tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
 
 </details>
-
-
