@@ -1,6 +1,6 @@
-# Azure Bicep Cheat sheet
+# Azure Bicep Cheat Sheet
 
-Azure Bicep has become my preferred tool for crafting infrastructure-as-code for Azure, thanks to its modularity and effortless adaptability. This repository serves as a handy cheat sheet, offering rapid code snippets and references for Azure Bicep.
+Azure Bicep has become my preferred tool for writing infrastructure-as-code for Azure, thanks to its modularity and effortless adaptability. This repository serves as a handy cheat sheet, offering code snippets and references for Azure Bicep.
 
 > Community contributions are appreciated :-)! If you have content to add, please add it to the sheet! Make sure to check the [contribution guidelines](CONTRIBUTING.md) before contributing.
 
