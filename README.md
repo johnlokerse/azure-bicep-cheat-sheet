@@ -18,6 +18,8 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 
 ## Topics
 
+> Click the arrow next to a topic to expand its content.
+
 <details>
   <summary>
     <h2>Basics</h2> <br>
@@ -372,7 +374,7 @@ var varGroceryStore = [
     <i>TODO.</i>
   </summary>
   TODO
-</details
+</details>
 
 <details>
   <summary>
