@@ -225,11 +225,6 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 | managementGroup  | `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`  |
 | tenant           | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
 
-- resource group scope: `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`
-- subscription scope: `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`
-- management group scope: `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`
-- tenant scope: `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`
-
 ### Azure PowerShell
 
 | Scope            | Command       |
