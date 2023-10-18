@@ -363,3 +363,30 @@ returns
 ```
 
 </details>
+
+<details>
+  <summary>
+    <h2>Conditions</h2><br>
+    <i>todo.</i>
+  </summary>
+
+### If condition
+
+```bicep
+param parDeployResource bool
+
+resource resDnsZone 'Microsoft.Network/dnszones@2018-05-01' = if (parDeployResource) {
+  name: 'myZone'
+  location: 'global'
+}
+```
+
+### Ternary if/else condition
+
+```bicep
+param parEnvironment string
+
+var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
+```
+
+</details>
