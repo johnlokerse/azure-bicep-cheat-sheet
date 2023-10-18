@@ -179,6 +179,90 @@ output outResult string = '${varGreeting} World'
 
 <details>
   <summary>
+    <h2>Conditions</h2><br>
+    <i>Resource definitions based on conditions.</i>
+  </summary>
+
+### If condition
+
+```bicep
+param parDeployResource bool
+
+resource resDnsZone 'Microsoft.Network/dnszones@2018-05-01' = if (parDeployResource) {
+  name: 'myZone'
+  location: 'global'
+}
+```
+
+### Ternary if/else condition
+
+```bicep
+param parEnvironment string
+
+var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
+```
+
+</details>
+
+<details>
+  <summary>
+    <h2>Loops</h2><br>
+    <i>Loop constructions</i>
+  </summary>
+
+### foreach using an array
+
+```bicep
+param parStorageAccountNames array = [
+  'storageaccount1'
+  'storageaccount2'
+  'storageaccount3'
+]
+
+resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for name in parStorageAccountNames: {
+  name: name
+  location: 'westeurope'
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+}]
+```
+
+### foreach using an array of objects
+
+``` bicep
+param parStorageAccountNames array = [
+  {
+      name: 'storageaccount1'
+      kind: 'StorageV2'
+      sku: {
+          name: 'Standard_LRS'
+      }
+  }
+  {
+      name: 'storageaccount2'
+      kind: 'StorageV2'
+      sku: {
+          name: 'Standard_LRS'
+      }
+  }
+]
+
+resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for storageAccount in parStorageAccountNames: {
+  name: storageAccount.name
+  location: 'westeurope'
+  kind: storageAccount.kind
+  sku: {
+      name: storageAccount.sku
+  }
+}]
+```
+
+
+
+<details>
+  <summary>
     <h2>Dependencies</h2><br>
     <i>Implicit and explicit dependencies.</i>
   </summary>
@@ -216,55 +300,6 @@ output outResult string = '${varGreeting} World'
     ]
   }
 ```
-
-</details>
-
-<details>
-  <summary>
-    <h2>Deployment</h2><br>
-    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
-  </summary>
-
-### Azure CLI
-
-| Scope            | Command       |
-| ---------------- | ------------- |
-| resourceGroup    | `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`  |
-| subscription     | `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
-| managementGroup  | `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`  |
-| tenant           | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
-
-### Azure PowerShell
-
-| Scope            | Command       |
-| ---------------- | ------------- |
-| resourceGroup    | `New-AzResourceGroupDeployment -ResourceGroupName "YourResourceGroupName" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam`  |
-| subscription     | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
-| managementGroup  | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
-| tenant           | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
-
-</details>
-
-<details>
-  <summary>
-    <h2>Target Scopes</h2><br>
-    <i>Deployment scopes.</i>
-  </summary>
-
-### Target scopes
-
-The `targetScope` directive in Azure Bicep determines the level at which the Bicep template will be deployed within Azure. The default is `targetScope = 'resourceGroup'`.
-
-Azure Bicep supports multiple levels of `targetScope`:
-
-| Scope           | Description     |
-| --------------- | --------------- |
-| resourceGroup   | The Bicep file is intended to be deployed at the Resource Group level. |
-| subscription    | The Bicep file targets a Subscription, allowing you to manage resources or configurations across an entire subscription. |
-| managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group. |
-| tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
-
-</details>
 
 <details>
   <summary>
@@ -371,88 +406,6 @@ returns
 
 </details>
 
-<details>
-  <summary>
-    <h2>Conditions</h2><br>
-    <i>Resource definitions based on conditions.</i>
-  </summary>
-
-### If condition
-
-```bicep
-param parDeployResource bool
-
-resource resDnsZone 'Microsoft.Network/dnszones@2018-05-01' = if (parDeployResource) {
-  name: 'myZone'
-  location: 'global'
-}
-```
-
-### Ternary if/else condition
-
-```bicep
-param parEnvironment string
-
-var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
-```
-
-</details>
-
-<details>
-  <summary>
-    <h2>Loops</h2><br>
-    <i>Loop constructions</i>
-  </summary>
-
-### foreach using an array
-
-```bicep
-param parStorageAccountNames array = [
-  'storageaccount1'
-  'storageaccount2'
-  'storageaccount3'
-]
-
-resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for name in parStorageAccountNames: {
-  name: name
-  location: 'westeurope'
-  kind: 'StorageV2'
-  sku: {
-    name: 'Standard_LRS'
-  }
-}]
-```
-
-### foreach using an array of objects
-
-``` bicep
-param parStorageAccountNames array = [
-  {
-      name: 'storageaccount1'
-      kind: 'StorageV2'
-      sku: {
-          name: 'Standard_LRS'
-      }
-  }
-  {
-      name: 'storageaccount2'
-      kind: 'StorageV2'
-      sku: {
-          name: 'Standard_LRS'
-      }
-  }
-]
-
-resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [for storageAccount in parStorageAccountNames: {
-  name: storageAccount.name
-  location: 'westeurope'
-  kind: storageAccount.kind
-  sku: {
-      name: storageAccount.sku
-  }
-}]
-```
-
 </details>
 
 <details>
@@ -475,5 +428,54 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
   }
 }
 ```
+
+</details>
+
+</details>
+
+<details>
+  <summary>
+    <h2>Deployment</h2><br>
+    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+  </summary>
+
+### Azure CLI
+
+| Scope            | Command       |
+| ---------------- | ------------- |
+| resourceGroup    | `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`  |
+| subscription     | `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
+| managementGroup  | `az deployment mg create --management-group-id YourManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`  |
+| tenant           | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
+
+### Azure PowerShell
+
+| Scope            | Command       |
+| ---------------- | ------------- |
+| resourceGroup    | `New-AzResourceGroupDeployment -ResourceGroupName "YourResourceGroupName" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam`  |
+| subscription     | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+| managementGroup  | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+| tenant           | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+
+</details>
+
+<details>
+  <summary>
+    <h2>Target Scopes</h2><br>
+    <i>Deployment scopes.</i>
+  </summary>
+
+### Target scopes
+
+The `targetScope` directive in Azure Bicep determines the level at which the Bicep template will be deployed within Azure. The default is `targetScope = 'resourceGroup'`.
+
+Azure Bicep supports multiple levels of `targetScope`:
+
+| Scope           | Description     |
+| --------------- | --------------- |
+| resourceGroup   | The Bicep file is intended to be deployed at the Resource Group level. |
+| subscription    | The Bicep file targets a Subscription, allowing you to manage resources or configurations across an entire subscription. |
+| managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group. |
+| tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
 
 </details>
