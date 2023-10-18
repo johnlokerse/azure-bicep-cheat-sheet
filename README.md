@@ -15,3 +15,79 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 - [Agnostic] Via Azure CLI: `az bicep install`
 - [Windows] Via Chocolatey: `choco install bicep`
 - [MacOS] Via Homebrew: `brew install bicep`
+
+<details>
+  <summary><h2>Basics</h2></summary>
+
+  ### Create a resource 
+  ```bicep
+  resource resourceName 'ResourceType@version' = {
+    name: 'exampleResourceName'
+    properties: {
+      // resource properties here
+    }
+  }
+  ```
+
+  ### Create a child resource
+  
+  **Via name**
+  
+  ```bicep
+  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+    name: 'my-vnet'
+  }
+  
+  resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+    name: '${resVnet}/my-subnet'
+  }
+  ```
+  
+  **Via parent property**
+  
+  ```bicep
+  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+    name: 'my-vnet'
+  }
+  
+  resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+    name: 'my-subnet'
+    parent: resVnet
+  }
+  ```
+  
+  **Via parent resource**
+  
+  ```bicep
+  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+    name: 'my-vnet'
+  
+    resource resChildSubnet 'subnets' = {
+      name: 'my-subnet'
+    }
+  }
+  ```
+
+### Reference to an existing resource
+
+  ```bicep
+  resource resKeyVaultRef 'Microsoft.KeyVault/vaults@2019-09-01' = existing {
+    name: 'myExistingKeyVaultName'
+  }
+  ```
+
+### Access a nested resource (::)
+
+  ```bicep
+  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
+    name: 'my-vnet'
+  
+    resource resChildSubnet 'subnets' existing = {
+      name: 'my-subnet'
+    }
+  }
+  
+  // query child resource
+  output outChildSubnetId string = resVnet::resChildSubnet.id
+  ```
+</details>
