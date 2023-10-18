@@ -138,6 +138,13 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 
 Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom (user defined type)`.
 
+### String interpolation
+
+```bicep
+var varGreeting = 'Hello'
+output outResult string = '${varGreeting} World'
+```
+
 </details>
 
 <details>
@@ -367,7 +374,7 @@ returns
 <details>
   <summary>
     <h2>Conditions</h2><br>
-    <i>todo.</i>
+    <i>Resource definitions based on conditions.</i>
   </summary>
 
 ### If condition
@@ -394,7 +401,7 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
 <details>
   <summary>
     <h2>Loops</h2><br>
-    <i>todo.</i>
+    <i>Loop constructions</i>
   </summary>
 
 ### foreach using an array
