@@ -486,4 +486,28 @@ Azure Bicep supports multiple levels of `targetScope`:
 | managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group. |
 | tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
 
+```bicep
+targetScope = 'resourceGroup'
+
+resource resKeyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
+  // key vault properties here
+}
+```
+
+Use the scope property on modules to deploy on a different scope than the target scope:
+
+```bicep
+// Uses the targetScope
+module modStorageModule1 'storage.bicep' = {
+  name: 'storageModule1'
+}
+
+// Uses the scope of the module
+module modStorageModule2 'storage.bicep' = {
+  name: 'storageModule2'
+  scope: resourceGroup('other-subscription-id', 'other-resource-group-name')
+  // module properties here
+}
+```
+
 </details>
