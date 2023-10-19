@@ -470,7 +470,7 @@ var varGroceryStore = [
 <details>
   <summary>
     <h2>Target Scopes</h2><br>
-    <i>Deployment scopes.</i>
+    <i>Defining deployment levels</i>
   </summary>
 
 ### Target scopes
