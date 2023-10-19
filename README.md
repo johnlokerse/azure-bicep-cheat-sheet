@@ -379,7 +379,7 @@ var varGroceryStore = [
 <details>
   <summary>
     <h2>Bicepconfig</h2><br>
-    <i>Configuration of Azure Bicep.</i>
+    <i>Customize your Bicep development experience.</i>
   </summary>
 
 ### Azure Container Registry configuration
