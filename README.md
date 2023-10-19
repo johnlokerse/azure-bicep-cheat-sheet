@@ -147,6 +147,16 @@ var varGreeting = 'Hello'
 output outResult string = '${varGreeting} World'
 ```
 
+### Multi-line strings
+
+```bicep
+var varMultiLineString = '''
+  This is a
+  Muli-line string
+  variable.
+'''
+```
+
 </details>
 
 <details>
