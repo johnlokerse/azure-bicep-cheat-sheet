@@ -23,18 +23,18 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 <details>
   <summary>
     <h2>Basics</h2> <br>
-    <i>Declarations of new and existing resources, variables, parameters and outputs.</i>
+    <i>Declarations of new and existing resources, variables, parameters and outputs, etcetera.</i>
   </summary>
 
 ### Create a resource
 
 ```bicep
-  resource resourceName 'ResourceType@version' = {
-    name: 'exampleResourceName'
-    properties: {
-      // resource properties here
-    }
+resource resourceName 'ResourceType@version' = {
+  name: 'exampleResourceName'
+  properties: {
+    // resource properties here
   }
+}
 ```
 
 ### Create a child resource
@@ -42,66 +42,66 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 #### Via name
 
 ```bicep
-  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
-    name: 'my-vnet'
-  }
+resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+  name: 'my-vnet'
+}
 
-  resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
-    name: '${resVnet}/my-subnet'
-  }
+resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+  name: '${resVnet}/my-subnet'
+}
 ```
 
 #### Via parent property
 
 ```bicep
-  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
-    name: 'my-vnet'
-  }
+resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+  name: 'my-vnet'
+}
 
-  resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
-    name: 'my-subnet'
-    parent: resVnet
-  }
+resource resChildSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+  name: 'my-subnet'
+  parent: resVnet
+}
 ```
 
 #### Via parent resource
 
 ```bicep
-  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
-    name: 'my-vnet'
+resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+  name: 'my-vnet'
 
-    resource resChildSubnet 'subnets' = {
-      name: 'my-subnet'
-    }
+  resource resChildSubnet 'subnets' = {
+    name: 'my-subnet'
   }
+}
 ```
 
 ### Reference to an existing resource
 
 ```bicep
-  resource resKeyVaultRef 'Microsoft.KeyVault/vaults@2019-09-01' = existing {
-    name: 'myExistingKeyVaultName'
-  }
+resource resKeyVaultRef 'Microsoft.KeyVault/vaults@2019-09-01' = existing {
+  name: 'myExistingKeyVaultName'
+}
 ```
 
 ### Access a nested resource (::)
 
 ```bicep
-  resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
-    name: 'my-vnet'
-    resource resChildSubnet 'subnets' existing = {
-      name: 'my-subnet'
-    }
+resource resVnet 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
+  name: 'my-vnet'
+  resource resChildSubnet 'subnets' existing = {
+    name: 'my-subnet'
   }
+}
 
-  // access child resource
-  output outChildSubnetId string = resVnet::resChildSubnet.id
+// access child resource
+output outChildSubnetId string = resVnet::resChildSubnet.id
 ```
 
 ### Declare a variable
 
 ```bicep
-  var varEnvironment = 'dev'
+var varEnvironment = 'dev'
 ```
 
 There is no need to declare a datatype for a variable, because the type is inferred from the value.
@@ -109,8 +109,8 @@ There is no need to declare a datatype for a variable, because the type is infer
 ### Declare a parameter
 
 ```bicep
-  param parStorageAccountName string
-  param parLocation string = resourceGroup().location
+param parStorageAccountName string
+param parLocation string = resourceGroup().location
 ```
 
 Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom (user defined type)`.
@@ -118,24 +118,24 @@ Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom 
 ### Declare a secure parameter
 
 ```bicep
-  @secure()
-  param parSecureParameter string
+@secure()
+param parSecureParameter string
 ```
 
 ### Declare an output
 
 ```bicep
-  resource resPublicIp 'Microsoft.Network/publicIPAddresses@2023-02-01' ={
-    name: parPublicIpName
-    tags: parTags
-    location: parLocation
-    zones: parAvailabilityZones
-    sku: parPublicIpSku
-    properties: parPublicIpProperties
-  }
+resource resPublicIp 'Microsoft.Network/publicIPAddresses@2023-02-01' ={
+  name: parPublicIpName
+  tags: parTags
+  location: parLocation
+  zones: parAvailabilityZones
+  sku: parPublicIpSku
+  properties: parPublicIpProperties
+}
 
-  output outPublicIpId string = resPublicIp.id
-  output outMyString string = 'Hello!'
+output outPublicIpId string = resPublicIp.id
+output outMyString string = 'Hello!'
 ```
 
 Available datatypes are: `string`, `bool`, `int`, `object`, `array` and `custom (user defined type)`.
@@ -168,23 +168,22 @@ var varMultiLineString = '''
 ### Create a module
 
 ```bicep
-  module modVirtualNetwork './network.bicep' = {
-    name: 'networkModule'
-    params: {
-      parLocation: 'westeurope'
-      parVnetName: 'my-vnet-name'
-    }
+module modVirtualNetwork './network.bicep' = {
+  name: 'networkModule'
+  params: {
+    parLocation: 'westeurope'
+    parVnetName: 'my-vnet-name'
   }
-
+}
 ```
 
 ### Reference to a module using a bicep registry
 
 ```bicep
-  module modBicepRegistryReference 'br/<bicep registry name>:<file path>:<tag>' = {
-      name: 'deployment-name'
-      params: {}
-  }
+module modBicepRegistryReference 'br/<bicep registry name>:<file path>:<tag>' = {
+  name: 'deployment-name'
+  params: {}
+}
 ```
 
 </details>
@@ -246,18 +245,18 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
 ``` bicep
 param parStorageAccountNames array = [
   {
-      name: 'storageaccount1'
-      kind: 'StorageV2'
-      sku: {
-          name: 'Standard_LRS'
-      }
+    name: 'storageaccount1'
+    kind: 'StorageV2'
+    sku: {
+      name: 'Standard_LRS'
+    }
   }
   {
-      name: 'storageaccount2'
-      kind: 'StorageV2'
-      sku: {
-          name: 'Standard_LRS'
-      }
+    name: 'storageaccount2'
+    kind: 'StorageV2'
+    sku: {
+      name: 'Standard_LRS'
+    }
   }
 ]
 
@@ -266,7 +265,7 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
   location: 'westeurope'
   kind: storageAccount.kind
   sku: {
-      name: storageAccount.sku
+    name: storageAccount.sku
   }
 }]
 ```
@@ -324,11 +323,11 @@ var varGroceryStore = [
 ### map() function
 
 ```bicep
-  output outDiscount array = map(range(0, length(varGroceryStore)), item => {
-    productNumber: item
-    productName: varGroceryStore[item].productName
-    discountedPrice: 'The item ${varGroceryStore[item].productName} is on sale. Sale price: ${(varGroceryStore[item].productPrice / 2)}'
-  })
+output outDiscount array = map(range(0, length(varGroceryStore)), item => {
+  productNumber: item
+  productName: varGroceryStore[item].productName
+  discountedPrice: 'The item ${varGroceryStore[item].productName} is on sale. Sale price: ${(varGroceryStore[item].productPrice / 2)}'
+})
 ```
 
 #### returns
@@ -351,7 +350,7 @@ var varGroceryStore = [
 ### sort() function
 
 ```bicep
-  output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.productPrice)
+output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.productPrice)
 ```
 
 #### returns
@@ -381,9 +380,72 @@ var varGroceryStore = [
 <details>
   <summary>
     <h2>User Defined Types</h2><br>
-    <i>TODO.</i>
+    <i>Define custom complex data structures.</i>
   </summary>
-  TODO
+
+### Primitive types
+
+```bicep
+// a string type with two allowed strings ('Standard_LRS' or 'Standard_GRS')
+type skuType = 'Standard_LRS' | 'Standard_GRS'
+
+// an integer type with one allowed value (1337)
+type integerType = 1337
+
+// an boolean type with one allowed value (true)
+type booleanType = true
+
+// Reference the type
+param parMyStringType skuType
+param parMyIntType integerType
+param parMyBoolType booleanType
+```
+
+### A custom type that enforced an array with a specific object structure
+
+```bicep
+type arrayWithObjectsType = {
+  name: string
+  age: int
+}[]
+
+param parCustomArray arrayWithObjectsType = [
+  {
+    name: 'John'
+    age: 30
+  }
+]
+```
+
+### Optional properties in objects (using ?)
+
+```bicep
+type arrayWithObjectsType = {
+  name: string
+  age: int
+  hasChildren: bool?
+  hasPets: bool?
+}[]
+
+param parCustomArray arrayWithObjectsType = [
+  {
+    name: 'John'
+    age: 30
+  }
+  {
+    name: 'Jane'
+    age: 31
+    hasPets: true
+  }
+  {
+    name: 'Jack'
+    age: 45
+    hasChildren: true
+    hasPets: true
+  }
+]
+```
+
 </details>
 
 <details>
@@ -418,35 +480,37 @@ var varGroceryStore = [
 ### Implicit dependency using symbolic name
 
 ```bicep
-  resource resNetworkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
-    name: 'my-networkSecurityGroup'
-    location: resourceGroup().location
+resource resNetworkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+  name: 'my-networkSecurityGroup'
+  location: resourceGroup().location
+}
+
+resource nsgRule 'Microsoft.Network/networkSecurityGroups/securityRules@2019-11-01' = {
+  name: '${resNetworkSecurityGroup}/AllowAllRule'
+  properties: {
+    // resource properties here
   }
-  resource nsgRule 'Microsoft.Network/networkSecurityGroups/securityRules@2019-11-01' = {
-    name: '${resNetworkSecurityGroup}/AllowAllRule'
-    properties: {
-      // resource properties here
-    }
-  }
+}
 ```
 
 ### Explicit dependency using dependsOn
 
 ```bicep
-  resource resDnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
-    name: 'contoso.com'
-    location: 'global'
+resource resDnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
+  name: 'contoso.com'
+  location: 'global'
+}
+
+module modVirtualNetwork './network.bicep' = {
+  name: 'networkModule'
+  params: {
+    parLocation: 'westeurope'
+    parVnetName: 'my-vnet-name'
   }
-  module modVirtualNetwork './network.bicep' = {
-    name: 'networkModule'
-    params: {
-      parLocation: 'westeurope'
-      parVnetName: 'my-vnet-name'
-    }
-    dependsOn: [
-      resDnsZone
-    ]
-  }
+  dependsOn: [
+    resDnsZone
+  ]
+}
 ```
 
 </details>
