@@ -218,7 +218,7 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
 <details>
   <summary>
     <h2>Loops</h2><br>
-    <i>Loop constructions</i>
+    <i>Loop constructions.</i>
   </summary>
 
 ### foreach using an array
@@ -544,7 +544,7 @@ module modVirtualNetwork './network.bicep' = {
 <details>
   <summary>
     <h2>Target Scopes</h2><br>
-    <i>Defining deployment levels</i>
+    <i>Deployment scope definitions</i>
   </summary>
 
 ### Target scopes
