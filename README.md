@@ -2,6 +2,7 @@
 
 Azure Bicep has become my preferred tool for writing infrastructure-as-code for Azure, thanks to its modularity and effortless adaptability. This repository serves as a handy cheat sheet, offering code snippets and references for Azure Bicep.
 
+> [!NOTE]
 > Community contributions are welcome :-)! If you have content that you want to add, please add it to the cheat sheet using a pull request.
 
 <p align="center">
@@ -18,6 +19,7 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 
 ## Topics
 
+> [!NOTE]
 > Click the arrow next to a topic to expand its content.
 
 <details>
