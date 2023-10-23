@@ -546,7 +546,7 @@ module modVirtualNetwork './network.bicep' = {
 <details>
   <summary>
     <h2>Target Scopes</h2><br>
-    <i>Deployment scope definitions</i>
+    <i>Deployment scope definitions.</i>
   </summary>
 
 ### Target scopes
