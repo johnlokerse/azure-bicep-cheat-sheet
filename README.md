@@ -452,6 +452,76 @@ param parCustomArray arrayWithObjectsType = [
 
 <details>
   <summary>
+    <h2>Networking</h2><br>
+    <i>CIDR functions to make subnetting easier.</i>
+  </summary>
+
+### parseCidr() function
+
+```bicep
+output outParseCidrInformation object = parseCidr('192.168.1.0/24')
+```
+
+#### returns
+
+```json
+"outParseCidrInformation": {
+  "type": "Object",
+  "value": {
+    "broadcast": "192.168.1.255",
+    "cidr": 24,
+    "firstUsable": "192.168.1.1",
+    "lastUsable": "192.168.1.254",
+    "netmask": "255.255.255.0",
+    "network": "192.168.1.0"
+  }
+}
+```
+
+### cidrSubnet() function
+
+```bicep
+output outCidrSubnet string = cidrSubnet('192.168.1.0/24', 25, 0)
+```
+
+#### returns
+
+```json
+"outCidrSubnet": {
+  "type": "String",
+  "value": "192.168.1.0/25"
+}
+```
+
+### cidrHost() function
+
+```bicep
+output outCidrHost array = [for i in range(0, 10): cidrHost('192.168.1.0/24', i)]
+```
+
+#### returns
+
+```json
+"outCidrHost": {
+  "type": "Array",
+  "value": [
+    "192.168.1.1",
+    "192.168.1.2",
+    "192.168.1.3",
+    "192.168.1.4",
+    "192.168.1.5",
+    "192.168.1.6",
+    "192.168.1.7",
+    "192.168.1.8",
+    "192.168.1.9",
+    "192.168.1.10"
+  ]
+}
+```
+</details>
+
+<details>
+  <summary>
     <h2>Bicepconfig</h2><br>
     <i>Customize your Bicep development experience.</i>
   </summary>
