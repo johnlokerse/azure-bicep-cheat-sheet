@@ -453,7 +453,7 @@ param parCustomArray arrayWithObjectsType = [
 <details>
   <summary>
     <h2>Compile-time imports</h2><br>
-    <i>Import and export() enable reuse of user-defined types, variables, functions. Supported in Bicep and Bicepparam files.</i>
+    <i>Import and export() enable reuse of user-defined types variables, functions.<br>Supported in Bicep and Bicepparam files.</i>
   </summary>
 
 ### export() decorator (shared.bicep)
