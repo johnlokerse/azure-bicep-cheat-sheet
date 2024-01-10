@@ -452,6 +452,67 @@ param parCustomArray arrayWithObjectsType = [
 
 <details>
   <summary>
+    <h2>Compile-time imports</h2><br>
+    <i>Import and export() enable reuse of user-defined types, variables, functions. Supported in Bicep and Bicepparam files.</i>
+  </summary>
+
+### export() decorator (shared.bicep)
+
+```bicep
+@export()
+var region = 'we'
+
+@export()
+type tagsType = {
+  Environment: 'Prod' | 'Dev' | 'QA' | 'Stage' | 'Test'
+  CostCenter: string
+  Owner: string
+  BusinessUnit: string
+  *: string
+}
+```
+
+### import statement
+
+```bicep
+import { region, tagsType } from 'shared.bicep'
+
+output outRegion string = region
+output outTags tagsType = {
+  Environment: 'Dev'
+  CostCenter: '12345'
+  BusinessUnit: 'IT'
+  Owner: 'John Lokerse'
+}
+```
+
+### import statement with alias
+
+```bicep
+using 'keyVault.bicep'
+import { region as importRegion } from 'shared.bicep'
+
+param parKeyVaultName = 'kv-${importRegion}-${uniqueString(importRegion)}'
+```
+
+### import statement using a wildcard
+
+```bicep
+import * as shared from 'shared.bicep'
+
+output outRegion string = shared.region
+output outTags shared.tagsType = {
+  Environment: 'Dev'
+  CostCenter: '12345'
+  BusinessUnit: 'IT'
+  Owner: 'John Lokerse'
+}
+```
+
+</details>
+
+<details>
+  <summary>
     <h2>Networking</h2><br>
     <i>CIDR functions to make subnetting easier.</i>
   </summary>
