@@ -24,8 +24,8 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 
 <details>
   <summary>
-    <h2>Basics</h2> <br>
-    <i>Declarations of new and existing resources, variables, parameters and outputs, etcetera.</i>
+    <span><b>Basics</b></span>
+    <p><i>Declarations of new and existing resources, variables, parameters and outputs, etcetera.</i></p>
   </summary>
 
 ### Create a resource
@@ -163,8 +163,8 @@ var varMultiLineString = '''
 
 <details>
   <summary>
-    <h2>Modules</h2><br>
-    <i>Split your deployment into smaller, reusable components.</i>
+    <span><b>Modules</b></span>
+    <p><i>Split your deployment into smaller, reusable components.</i></p>
   </summary>
 
 ### Create a module
@@ -192,8 +192,8 @@ module modBicepRegistryReference 'br/<bicep registry name>:<file path>:<tag>' = 
 
 <details>
   <summary>
-    <h2>Conditions</h2><br>
-    <i>Resource definitions based on conditions.</i>
+    <span><b>Conditions</b></span>
+    <p><i>Resource definitions based on conditions.</i></p>
   </summary>
 
 ### If condition
@@ -219,8 +219,8 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
 
 <details>
   <summary>
-    <h2>Loops</h2><br>
-    <i>Loop constructions.</i>
+    <span><b>Loops</b></span>
+    <p><i>Loop constructions.</i></p>
   </summary>
 
 ### foreach using an array
@@ -276,8 +276,8 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
 
 <details>
   <summary>
-    <h2>Data manipulation</h2><br>
-    <i>Functions used to manipulate data.</i>
+    <span><b>Data manipulation</b></span>
+    <p><i>Functions used to manipulate data.</i></p>
   </summary>
 
 ### Example data
@@ -381,8 +381,8 @@ output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.
 
 <details>
   <summary>
-    <h2>User Defined Types</h2><br>
-    <i>Define custom complex data structures.</i>
+    <span><b>User Defined Types</b></span>
+    <p><i>Define custom complex data structures.</i></p>
   </summary>
 
 ### Primitive types
@@ -452,8 +452,8 @@ param parCustomArray arrayWithObjectsType = [
 
 <details>
   <summary>
-    <h2>Compile-time imports</h2><br>
-    <i>Import and export() enable reuse of user-defined types variables, functions.<br>Supported in Bicep and Bicepparam files.</i>
+    <span><b>Compile-time imports</b></span>
+    <p><i>Import and export() enable reuse of user-defined types variables, functions.<br>Supported in Bicep and Bicepparam files.</i></p>
   </summary>
 
 ### export() decorator (shared.bicep)
@@ -513,8 +513,8 @@ output outTags shared.tagsType = {
 
 <details>
   <summary>
-    <h2>Networking</h2><br>
-    <i>CIDR functions to make subnetting easier.</i>
+    <span><b>Networking</b></span>
+    <p><i>CIDR functions to make subnetting easier.</i></p>
   </summary>
 
 ### parseCidr() function
@@ -583,8 +583,8 @@ output outCidrHost array = [for i in range(0, 10): cidrHost('192.168.1.0/24', i)
 
 <details>
   <summary>
-    <h2>Bicepconfig</h2><br>
-    <i>Customize your Bicep development experience.</i>
+    <span><b>Bicepconfig</b></span>
+    <p><i>Customize your Bicep development experience.</i></p>
   </summary>
 
 ### Azure Container Registry configuration
@@ -606,8 +606,8 @@ output outCidrHost array = [for i in range(0, 10): cidrHost('192.168.1.0/24', i)
 
 <details>
   <summary>
-    <h2>Dependencies</h2><br>
-    <i>Implicit and explicit dependencies.</i>
+    <span><b>Dependencies</b></span>
+    <p><i>Implicit and explicit dependencies.</i></p>
   </summary>
 
 ### Implicit dependency using symbolic name
@@ -650,34 +650,34 @@ module modVirtualNetwork './network.bicep' = {
 
 <details>
   <summary>
-    <h2>Deployment</h2><br>
-    <i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i>
+    <span><b>Deployment</b></span>
+    <p><i>Orchestration commands to deploy Azure Bicep to your Azure Environment.</i></p>
   </summary>
 
 ### Azure CLI
 
-| Scope            | Command       |
-| ---------------- | ------------- |
-| resourceGroup    | `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`  |
-| subscription     | `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
-| managementGroup  | `az deployment mg create --management-group-id ManagementGroupId --template-file template.bicep --parameters parameters.bicepparam`  |
-| tenant           | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`  |
+| Scope           | Command                                                                                                                             |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| resourceGroup   | `az deployment group create --resource-group ResourceGroupName --template-file template.bicep --parameters parameters.bicepparam`   |
+| subscription    | `az deployment sub create --location location --template-file template.bicep --parameters parameters.bicepparam`                    |
+| managementGroup | `az deployment mg create --management-group-id ManagementGroupId --template-file template.bicep --parameters parameters.bicepparam` |
+| tenant          | `az deployment tenant create --location location --template-file template.bicep --parameters parameters.bicepparam`                 |
 
 ### Azure PowerShell
 
-| Scope            | Command       |
-| ---------------- | ------------- |
-| resourceGroup    | `New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroupName" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam`  |
-| subscription     | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
-| managementGroup  | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
-| tenant           | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`  |
+| Scope           | Command                                                                                                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| resourceGroup   | `New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroupName" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam`                         |
+| subscription    | `New-AzDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`                                                       |
+| managementGroup | `New-AzManagementGroupDeployment -ManagementGroupId "ManagementGroupId" -Location "location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"` |
+| tenant          | `New-AzTenantDeployment -Location "Location" -TemplateFile "template.bicep" -TemplateParameterFile "parameters.bicepparam"`                                                 |
 
 </details>
 
 <details>
   <summary>
-    <h2>Target Scopes</h2><br>
-    <i>Deployment scope definitions.</i>
+    <span><b>Target Scopes</b></span>
+    <p><i>Deployment scope definitions.</i></p>
   </summary>
 
 ### Target scopes
@@ -686,12 +686,12 @@ The `targetScope` directive in Azure Bicep determines the level at which the Bic
 
 Azure Bicep supports multiple levels of `targetScope`:
 
-| Scope           | Description     |
-| --------------- | --------------- |
-| resourceGroup   | The Bicep file is intended to be deployed at the Resource Group level. |
+| Scope           | Description                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| resourceGroup   | The Bicep file is intended to be deployed at the Resource Group level.                                                   |
 | subscription    | The Bicep file targets a Subscription, allowing you to manage resources or configurations across an entire subscription. |
-| managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group. |
-| tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies. |
+| managementGroup | For managing resources or configurations across multiple subscriptions under a specific Management Group.                |
+| tenant          | The highest scope, targeting the entire Azure tenant. This is useful for certain global resources or policies.           |
 
 ```bicep
 targetScope = 'resourceGroup'
