@@ -452,6 +452,52 @@ param parCustomArray arrayWithObjectsType = [
 
 <details>
   <summary>
+    <span><b>User Defined Functions</b></span>
+    <p><i>Define custom complex expressions.</i></p>
+  </summary>
+
+### User-defined function syntax
+
+```func <function-name> (<parameter-name> <data-type>) <return-type> => <expression>```
+
+### Basic user-defined function
+
+```bicep
+func funcSayHelloTo() string => 'Hello and welcome, John Doe'
+```
+
+### User-defined function with parameters
+
+```bicep
+func funcSayHelloTo(name string) string => 'Hello and welcome, ${name}'
+```
+
+With multiple parameters:
+
+```bicep
+func funcPersonNameAndAge(name string, age int) string => 'My name is ${name} and my age is ${age}'
+```
+
+### User-defined function return types
+
+```bicep
+func funcReturnTypeArray() array => [1, 2, 3, 4, 5]
+func funcReturnTypeObject() object => {name: 'John Doe', age: 31}
+func funcReturnTypeInt() int => 1337
+func funcReturnTypeBool(key string) bool => contains({}, key)
+func funcReturnTypeUserDefinedType() customTypeUsedAsReturnType => {
+  hello: 'world'
+}
+
+type customTypeUsedAsReturnType = {
+  hello: string
+}
+```
+
+</details>
+
+<details>
+  <summary>
     <span><b>Compile-time imports</b></span>
     <p><i>Import and export() enable reuse of user-defined types variables, functions.<br>Supported in Bicep and Bicepparam files.</i></p>
   </summary>
