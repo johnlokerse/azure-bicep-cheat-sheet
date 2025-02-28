@@ -775,7 +775,7 @@ module modStorageModule2 'storage.bicep' = {
 
 When you're writing Bicep, you can reference Azure Verified Modules (AVM) directly in your Bicep files. To get access to the IntelliSense prompt, you need the Azure Bicep VSCode extension installed. Additionally, to restore the Bicep modules successfully, make sure you have access to the Microsoft Container Registry at mcr.microsoft.com.
 
-As an example, here is how to reference to an Azure Key Vault:
+As an example, here is how to reference to an Azure Key Vault from the Microsoft Container Registry:
 ![AVM](images/AVM-KV.gif)
 
 More information on Azure Verified Modules can be found [here](https://aka.ms/avm).
