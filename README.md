@@ -30,7 +30,9 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 
 ### Create a resource
 
-![Static Badge](https://img.shields.io/badge/GitHub%20Copilot-Prompt-Prompt?color=%23202830&link=https%3A%2F%2Fgithub.com%2Fcopilot%3Fprompt%3Dhow%2520to%2520define%2520a%2520resource%2520in%2520azure%2520bicep)
+[GitHub Copilot Prompt](https://github.com/copilot?prompt=how%20to%20define%20a%20resource%20in%20azure%20bicep)
+
+how to define a resource in azure bicep
 
 ```bicep
 resource resourceName 'ResourceType@version' = {
