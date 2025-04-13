@@ -30,7 +30,7 @@ Azure Bicep is a domain-specific language (also known as DSL) designed by Micros
 
 ### Create a resource
 
-[GitHub Copilot Prompt](https://github.com/copilot?prompt=how%20to%20define%20a%20resource%20in%20azure%20bicep)
+[GitHub Copilot Prompt - Learn more on resource creation](https://github.com/copilot?prompt=how%20to%20define%20a%20resource%20in%20azure%20bicep)
 
 how to define a resource in azure bicep
 
@@ -44,6 +44,8 @@ resource resourceName 'ResourceType@version' = {
 ```
 
 ### Create a child resource
+
+[GitHub Copilot Prompt - Learn more about creating child resources](https://github.com/copilot?prompt=Can%20you%20explain%20the%20differences%20between%20creating%20child%20resources%20in%20Azure%20Bicep%20using%20a%20name%20property,%20using%20a%20parent%20property,%20and%20nesting%20them%20within%20a%20parent%20resource%20block?%20Please%20include%20examples%20and%20clarify%20when%20to%20use%20each%20approach.)
 
 #### Via name
 
@@ -173,6 +175,8 @@ var varMultiLineString = '''
 
 ### Create a module
 
+[GitHub Copilot Prompt](https://github.com/copilot?prompt=Can%20you%20explain%20what%20Azure%20Bicep%20modules%20are%20and%20how%20they%20work?%20Also,%20how%20can%20you%20reference%20a%20module%20stored%20in%20an%20external%20Azure%20Container%20Registry%20(ACR)?)
+
 ```bicep
 module modVirtualNetwork './network.bicep' = {
   name: 'networkModule'
@@ -200,6 +204,8 @@ module modBicepRegistryReference 'br/<bicep registry name>:<file path>:<tag>' = 
     <p><i>Resource definitions based on conditions.</i></p>
   </summary>
 
+[GitHub Copilot - Learn more about conditions](https://github.com/copilot?prompt=How%20do%20conditions%20work%20in%20Azure%20Bicep?%20Can%20you%20explain%20it%20in%20detail%20and%20provide%20examples%20of%20how%20to%20use%20conditions%20to%20control%20resource%20deployment%20or%20property%20values?)
+
 ### If condition
 
 ```bicep
@@ -226,6 +232,8 @@ var varSku = parEnvironment == 'prod' ? 'premium' : 'standard'
     <span><b>Loops</b></span>
     <p><i>Loop constructions.</i></p>
   </summary>
+
+[GitHub Copilot - Learn more about loops](https://github.com/copilot?prompt=How%20do%20you%20create%20loops%20in%20Azure%20Bicep?%20Can%20you%20show%20examples%20using%20the%20for%20keyword%20to%20deploy%20multiple%20resources%20or%20set%20values%20in%20an%20array?)
 
 ### foreach using an array
 
@@ -283,6 +291,8 @@ resource resStorageAccounts 'Microsoft.Storage/storageAccounts@2021-04-01' = [fo
     <span><b>Data manipulation</b></span>
     <p><i>Functions used to manipulate data.</i></p>
   </summary>
+
+[GitHub Copilot - Learn more about lambda functions](https://github.com/copilot?prompt=In%20Azure%20Bicep,%20how%20do%20the%20filter(),%20map(),%20and%20sort()%20functions%20work?%20Can%20you%20explain%20each%20function%20in%20detail%20and%20show%20how%20they%E2%80%99re%20used%20in%20practice?%20For%20example:%20%E2%80%A2output%20outProducts%20array%20=%20filter(varGroceryStore,%20item%20=%3E%20item.productPrice%20%3E=%204)%20%E2%80%A2output%20outDiscount%20array%20=%20map(range(0,%20length(varGroceryStore)),%20item%20=%3E%20{%20productNumber:%20item,%20productName:%20varGroceryStore[item].productName,%20discountedPrice:%20%27The%20item%20${varGroceryStore[item].productName}%20is%20on%20sale.%20Sale%20price:%20${(varGroceryStore[item].productPrice%20/%202)}%27%20})%20%E2%80%A2output%20outUsingSort%20array%20=%20sort(varGroceryStore,%20(a,%20b)%20=%3E%20a.productPrice%20%3C=%20b.productPrice)%20Please%20walk%20through%20what%20each%20of%20these%20functions%20does%20and%20when%20to%20use%20them)
 
 ### Example data
 
@@ -389,6 +399,8 @@ output outUsingSort array = sort(varGroceryStore, (a, b) => a.productPrice <= b.
     <p><i>Define custom complex data structures.</i></p>
   </summary>
 
+[GitHub Copilot - Learn more on User Defined Types](https://github.com/copilot?prompt=Can%20you%20explain%20in%20detail%20how%20User%20Defined%20Types%20work%20in%20Azure%20Bicep?%20Please%20include%20examples%20of%20defining%20custom%20object%20types,%20including%20how%20to%20structure%20them%20and%20how%20to%20define%20optional%20properties.%20Optional%20properties%20should%20be%20defined%20using%20a%20?%20at%20the%20type%20level%20(e.g.,%20type%20Bla%20=%20{%20name:%20string?%20}).%20Also%20include%20examples%20of%20arrays%20of%20objects%20with%20optional%20properties,%20such%20as:type%20arrayWithObjectsType%20=%20{%20name:%20string%20age:%20int%20hasChildren:%20bool?%20hasPets:%20bool?%20}[])
+
 ### Primitive types
 
 ```bicep
@@ -460,6 +472,8 @@ param parCustomArray arrayWithObjectsType = [
     <p><i>Define custom complex expressions.</i></p>
   </summary>
 
+[GitHub Copilot - Learn more about User Defined Functions](https://github.com/copilot?prompt=Can%20you%20explain%20in%20detail%20how%20User%20Defined%20Functions%20work%20in%20Azure%20Bicep?%20Please%20include%20examples%20that%20show%20how%20to%20define%20and%20use%20custom%20functions,%20including%20parameter%20definitions,%20return%20types,%20and%20function%20logic.%20Also%20include%20a%20simple%20example%20such%20as:func%20funcSayHelloTo()%20string%20=%3E%20%27Hello%20and%20welcome,%20John%20Doe%27%20output%20outName%20string%20=%20funcSayHelloTo()%20/*%20Outputs:%20%27Hello%20and%20welcome,%20John%20Doe%27%20*/)
+
 ### User-defined function syntax
 
 ```func <function-name> (<parameter-name> <data-type>) <return-type> => <expression>```
@@ -505,6 +519,8 @@ type customTypeUsedAsReturnType = {
     <span><b>Compile-time imports</b></span>
     <p><i>Import and export() enable reuse of user-defined types variables, functions.<br>Supported in Bicep and Bicepparam files.</i></p>
   </summary>
+
+[GitHub Copilot - learn more about compile-time imports](https://github.com/copilot?prompt=Show%20me%20how%20to%20use%20export%20and%20import%20in%20Azure%20Bicep%20to%20reuse%20a%20storage%20account%20resource%20across%20multiple%20Bicep%20files.)
 
 ### export() decorator (shared.bicep)
 
@@ -566,6 +582,8 @@ output outTags shared.tagsType = {
     <span><b>Networking</b></span>
     <p><i>CIDR functions to make subnetting easier.</i></p>
   </summary>
+
+[GitHub Copilot - learn more about the networking functions](https://github.com/copilot?prompt=Can%20you%20explain%20how%20to%20use%20CIDR%20functions%20in%20Azure%20Bicep%20to%20make%20subnetting%20easier?%20Show%20how%20functions%20like%20cidrSubnet(),%20cidrHost()%20and%20others%20help%20to%20calculate%20subnet%20ranges,%20addresses,%20or%20specific%20IPs%20based%20on%20a%20base%20CIDR%20block.%20Include%20practical%20examples%20such%20as%20splitting%20a%20/16%20address%20space%20into%20multiple%20/24%20subnets.)
 
 ### parseCidr() function
 
@@ -637,6 +655,8 @@ output outCidrHost array = [for i in range(0, 10): cidrHost('192.168.1.0/24', i)
     <p><i>Customize your Bicep development experience.</i></p>
   </summary>
 
+[GitHub Copilot - Learn more about bicepconfig.json](https://github.com/copilot?prompt=Tell%20me%20more%20about%20the%20bicepconfig.json%20in%20Azure%20Bicep.%20What%20does%20it%20do%20and%20why%20do%20I%20need%20it?)
+
 ### Azure Container Registry configuration
 
 ```json
@@ -659,6 +679,8 @@ output outCidrHost array = [for i in range(0, 10): cidrHost('192.168.1.0/24', i)
     <span><b>Dependencies</b></span>
     <p><i>Implicit and explicit dependencies.</i></p>
   </summary>
+
+[GitHub Copilot - learn more about dependencies](https://github.com/copilot?prompt=How%20do%20dependencies%20work%20in%20Azure%20Bicep?%20Explain%20it%20to%20me%20in%20detail%20and%20add%20examples.)
 
 ### Implicit dependency using symbolic name
 
@@ -730,6 +752,8 @@ module modVirtualNetwork './network.bicep' = {
     <p><i>Deployment scope definitions.</i></p>
   </summary>
 
+[GitHub Copilot - Learn more about target scopes](https://github.com/copilot?prompt=What%20are%20target%20scopes%20in%20Azure%20Bicep%20when%20deploying%20to%20Azure?)
+
 ### Target scopes
 
 The `targetScope` directive in Azure Bicep determines the level at which the Bicep template will be deployed within Azure. The default is `targetScope = 'resourceGroup'`.
@@ -774,6 +798,8 @@ module modStorageModule2 'storage.bicep' = {
     <span><b>Azure Verified Modules</b></span>
     <p><i>Microsoft building blocks for Azure Bicep right at your fingertips.</i></p>
   </summary>
+
+[GitHub Copilot - Learn more about Azure Verified Modules](https://github.com/copilot?prompt=What%20is%20Azure%20Verified%20Modules%20(aka.ms/avm)%20and%20how%20can%20I%20use%20it%20in%20my%20Azure%20Bicep%20files?)
 
 ### Azure Verified Modules reference
 
