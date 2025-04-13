@@ -799,7 +799,7 @@ module modStorageModule2 'storage.bicep' = {
     <p><i>Microsoft building blocks for Azure Bicep right at your fingertips.</i></p>
   </summary>
 
-[GitHub Copilot - Learn more about Azure Verified Modules](https://github.com/copilot?prompt=What%20is%20Azure%20Verified%20Modules%20(aka.ms/avm)%20and%20how%20can%20I%20use%20it%20in%20my%20Azure%20Bicep%20files?)
+[GitHub Copilot - Learn more about Azure Verified Modules](https://github.com/copilot?prompt=What%20are%20Azure%20Verified%20Modules%20(https://aka.ms/avm),%20and%20how%20can%20I%20use%20them%20in%20my%20Azure%20Bicep%20files?%20Please%20explain%20their%20purpose,%20benefits,%20and%20show%20an%20example%20of%20how%20to%20reference%20and%20deploy%20a%20verified%20module%20in%20a%20Bicep%20template.)
 
 ### Azure Verified Modules reference
 
